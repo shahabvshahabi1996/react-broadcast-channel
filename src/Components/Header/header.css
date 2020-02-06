@@ -1,0 +1,22 @@
+.header {
+    background-color: #eee;
+}
+
+.header > nav {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header > nav > ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+
+}
+
+.header > nav > ul li {
+    margin-right: 10px;
+}
+
