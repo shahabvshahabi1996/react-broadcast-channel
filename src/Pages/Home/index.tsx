@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Auth } from '../../app.routes';
+import auth from '../../Auth';
 
 interface IProps {
     history : any
@@ -7,13 +7,12 @@ interface IProps {
 
 const Home : React.FC<IProps> = props => {
 
-    const auth = new Auth();
 
     return (
         <>
             <div>
                 <h3>I'm Home</h3>
-                {!auth.isLogged() && <button onClick={() => auth.login(() => props.history.push('/admin'))}>Login</button>}
+                {!auth.isLogged() && <button onClick={() => auth.login()}>Login</button>}
             </div>
         </>
     )
