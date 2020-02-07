@@ -1,28 +1,13 @@
 import * as React from 'react';
-import {Route, Redirect} from 'react-router-dom';
+import {Route, Redirect , RouteProps} from 'react-router-dom';
+import auth from './Auth';
 
-export class Auth {
-
-    public isLogged() {
-        return localStorage.getItem('token') ? true : false;
-    }
-    
-    public logout(cb : any) {
-        localStorage.clear();
-        cb();
-    }
-    
-    public login(cb : any) {
-        let token = 'hellomynameistoken!';
-        localStorage.setItem('token',token);
-        cb();
-    }
+interface IProtectedRoute extends RouteProps {
+    component : any
 }
 
 
-export const ProtectedRoute = ({component : Component , ...rest} : {component : any  , path : string}) => {
-    
-    const auth = new Auth();
+export const ProtectedRoute : React.FC<IProtectedRoute> = ({component : Component , ...rest}) => {
     
     return <Route {...rest} render={(props) => {
         if(auth.isLogged()) {
@@ -32,7 +17,14 @@ export const ProtectedRoute = ({component : Component , ...rest} : {component : 
         }
 
         return (
-            <Redirect to="/" />
+            <Redirect to={
+                {
+                    pathname : '/',
+                    state : {
+                        from : props.location
+                    }
+                }
+            } />
         )
     }}/>
 }
