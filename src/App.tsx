@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter , Route , Switch } from 'react-router-dom';
 import { Home , Admin } from './Pages';
 import { Header } from './Components';
 import { ProtectedRoute } from './app.routes';
+import auth from './Auth';
 
-const App = () => {
+const App : React.FC = () => {
+  useEffect(() => {
+    auth.logoutFromAllTabs();
+  })
+
   return (
     <BrowserRouter>
         <Header>
@@ -17,6 +22,7 @@ const App = () => {
         </Switch>
     </BrowserRouter>
   );
+
 }
 
 export default App;
